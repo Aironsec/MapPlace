@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">mapLesson1</string>
+    <string name="title_activity_maps">Карта</string>
+    <string name="title_activity_mayplaces">Мои места</string>
+    <string name="menu_map_location">Текущая локация</string>
+    <string name="menu_map_myplaces">Мои места</string>
+    <string name="request_permission_rationale">Для использования этого приложения вам необходимо
+        разрешить определять местоположение.
+    </string>
+</resources>
