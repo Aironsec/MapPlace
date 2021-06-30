@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.maplesson1.R
 import com.example.maplesson1.utils.Constants.REQUEST_CODE_LOCATION_PERMISSION
 import com.example.maplesson1.utils.Permissions
+import com.example.maplesson1.view.base.permission.IPermissions
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
 
@@ -39,6 +40,13 @@ open class BaseMapsActivity : AppCompatActivity(), IPermissions {
                 Manifest.permission.ACCESS_FINE_LOCATION
             )
         }
+    }
+
+    fun getLoc(){
+
+    }
+    override fun requestPermission(getLoc: () -> Unit) {
+
     }
 
 }
