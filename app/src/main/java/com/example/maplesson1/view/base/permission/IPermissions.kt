@@ -1,7 +1,8 @@
 package com.example.maplesson1.view.base.permission
 
-import pub.devrel.easypermissions.EasyPermissions
+import android.location.Location
+import android.location.LocationManager
 
 interface IPermissions{
-    fun requestPermission(getLoc: () -> Unit)
+    fun getLocationWithPermission(mLocManager: LocationManager): Location?
 }

@@ -2,6 +2,8 @@ package com.example.maplesson1.view.base
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.location.Location
+import android.location.LocationManager
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -15,6 +17,18 @@ abstract class BaseView<T: AppState, I:IInteractor<T>>: AppCompatActivity(), IPe
 
     abstract val model: BaseViewModel<T>
 
+    override fun getLocationWithPermission(mLocManager: LocationManager): Location? {
+        val permissions = listOf(
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+        )
+        permissions.forEach { permission ->
+            if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED)
+                return null
+        }
+        return mLocManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER)
+    }
+
     val requestPermissionLaunch =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
             if (isGranted) {
@@ -22,6 +36,18 @@ abstract class BaseView<T: AppState, I:IInteractor<T>>: AppCompatActivity(), IPe
             }
 
         }
+
+    override fun chekPermissionAndRun(locate: () -> Location?) {
+        val permissions = listOf(
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+        )
+        permissions.forEach { permission ->
+            if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED)
+                return
+
+        }
+    }
 
     private fun showCurrentLocation() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)

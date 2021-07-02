@@ -41,7 +41,7 @@ class MapsActivity: BaseMapsActivity() {
         when (item.itemId) {
             R.id.menu_map_location -> {
 
-//                   val loc = mLocManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER)
+                   getLocationWithPermission(mLocManager)
 
             }
             R.id.menu_map_myplaces -> {

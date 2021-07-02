@@ -1,7 +1,11 @@
 package com.example.maplesson1.ui
 
 import android.Manifest
+import android.content.pm.PackageManager
+import android.location.Location
+import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.example.maplesson1.R
 import com.example.maplesson1.utils.Constants.REQUEST_CODE_LOCATION_PERMISSION
 import com.example.maplesson1.utils.Permissions
@@ -42,11 +46,16 @@ open class BaseMapsActivity : AppCompatActivity(), IPermissions {
         }
     }
 
-    fun getLoc(){
-
-    }
-    override fun requestPermission(getLoc: () -> Unit) {
-
+    override fun getLocationWithPermission(mLocManager: LocationManager): Location? {
+        val permissions = listOf(
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+        )
+        permissions.forEach { permission ->
+            if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED)
+                return null
+        }
+        return mLocManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER)
     }
 
 }
