@@ -1,35 +1,38 @@
-package com.example.maplesson1
+package com.example.maplesson1.view.main
 
-import android.content.Intent
 import android.location.LocationManager
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import com.example.maplesson1.MapHolder
+import com.example.maplesson1.MyPlacesActivity
+import com.example.maplesson1.R
 import com.example.maplesson1.databinding.ActivityMapsBinding
-import com.example.maplesson1.ui.BaseMapsActivity
+import com.example.maplesson1.model.data.AppState
+import com.example.maplesson1.view.base.BaseView
+import com.example.maplesson1.viewmodel.BaseViewModel
 import com.google.android.gms.maps.SupportMapFragment
 
-class MapsActivity: BaseMapsActivity() {
+class MapActivity: BaseView<AppState, MapInteractor>() {
     private lateinit var binding: ActivityMapsBinding
     private lateinit var mLocManager: LocationManager
 
+    override lateinit var model: BaseViewModel<AppState>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        requestPermission()
         mLocManager = getSystemService(LOCATION_SERVICE) as LocationManager
 
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(MapHolder())
+        initViewModel()
     }
 
-    private fun navigationTo(cls: Class<*>) {
-        Intent(this, cls).also {
-            startActivity(it)
-        }
+    private fun initViewModel() {
+        val
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -41,7 +44,7 @@ class MapsActivity: BaseMapsActivity() {
         when (item.itemId) {
             R.id.menu_map_location -> {
 
-                   getLocationWithPermission(mLocManager)
+//                   getLocationWithPermission(mLocManager)
 
             }
             R.id.menu_map_myplaces -> {
@@ -49,6 +52,10 @@ class MapsActivity: BaseMapsActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun renderData(appState: AppState) {
+        TODO("Not yet implemented")
     }
 
 }

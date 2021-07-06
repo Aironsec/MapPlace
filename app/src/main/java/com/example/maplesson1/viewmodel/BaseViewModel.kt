@@ -17,11 +17,14 @@ abstract class BaseViewModel<T : AppState>(
         }
     )
     abstract fun handlerError(error: Throwable)
+
     abstract fun getListLatLon()
+
     override fun onCleared() {
         super.onCleared()
         cancelJob()
     }
+
     protected fun cancelJob() {
         viewModelCoroutineScope.coroutineContext.cancelChildren()
     }
