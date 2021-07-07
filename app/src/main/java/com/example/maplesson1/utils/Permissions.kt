@@ -7,12 +7,12 @@ import androidx.core.content.ContextCompat
 
 object Permissions {
     fun hasLocationPermission(context: Context?): Boolean {
-        val permissions = listOf(
+        val requiredPermissions = listOf(
             Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.ACCESS_COARSE_LOCATION
         )
         checkNotNull(context)
-        permissions.forEach { permission ->
+        requiredPermissions.forEach { permission ->
             if (ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_DENIED)
                 return false
         }

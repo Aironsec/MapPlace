@@ -9,10 +9,11 @@ class App: Application() {
     override fun onCreate() {
         super.onCreate()
         startKoin{
-            modules(listOf(
+            printLogger()
+            modules(
                 repository,
                 mapScreen
-            ))
+            )
         }
     }
 }

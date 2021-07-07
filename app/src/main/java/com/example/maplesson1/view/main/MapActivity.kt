@@ -10,14 +10,14 @@ import com.example.maplesson1.R
 import com.example.maplesson1.databinding.ActivityMapsBinding
 import com.example.maplesson1.model.data.AppState
 import com.example.maplesson1.view.base.BaseView
-import com.example.maplesson1.viewmodel.BaseViewModel
 import com.google.android.gms.maps.SupportMapFragment
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MapActivity: BaseView<AppState, MapInteractor>() {
     private lateinit var binding: ActivityMapsBinding
     private lateinit var mLocManager: LocationManager
 
-    override lateinit var model: BaseViewModel<AppState>
+    override lateinit var model: MapViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +32,9 @@ class MapActivity: BaseView<AppState, MapInteractor>() {
     }
 
     private fun initViewModel() {
-        val
+        val viewModel: MapViewModel by viewModel()
+        model = viewModel
+        model.subscribe().observe(this) { renderData(it) }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -55,7 +57,12 @@ class MapActivity: BaseView<AppState, MapInteractor>() {
     }
 
     override fun renderData(appState: AppState) {
-        TODO("Not yet implemented")
+        when(appState){
+            is AppState.Success -> {
+
+            }
+            else -> //TODO
+        }
     }
 
 }

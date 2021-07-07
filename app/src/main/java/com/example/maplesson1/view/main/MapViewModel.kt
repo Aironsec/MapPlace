@@ -12,8 +12,8 @@ class MapViewModel(private val interactor: MapInteractor): BaseViewModel<AppStat
 
     override fun handlerError(error: Throwable) = _mutableLiveData.postValue(AppState.Error(error))
 
-    override fun getListLatLon() {
-        TODO("Not yet implemented")
+    override suspend fun getListLatLon() {
+        _mutableLiveData.postValue(interactor.getListLatLon())
     }
 
     override fun onCleared() {
